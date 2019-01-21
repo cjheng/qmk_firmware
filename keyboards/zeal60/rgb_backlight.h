@@ -79,6 +79,7 @@ bool process_record_backlight(uint16_t keycode, keyrecord_t *record);
 
 void backlight_set_key_hit(uint8_t row, uint8_t col);
 
+void backlight_effect_set(uint8_t effect);
 void backlight_effect_increase(void);
 void backlight_effect_decrease(void);
 void backlight_effect_speed_increase(void);

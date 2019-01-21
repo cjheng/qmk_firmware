@@ -45,12 +45,12 @@ backlight_config g_config = {
 	.disable_hhkb_blocker_leds = RGB_BACKLIGHT_DISABLE_HHKB_BLOCKER_LEDS,
 	.disable_when_usb_suspended = RGB_BACKLIGHT_DISABLE_WHEN_USB_SUSPENDED,
 	.disable_after_timeout = RGB_BACKLIGHT_DISABLE_AFTER_TIMEOUT,
-	.brightness = 255,
-	.effect = RGB_BACKLIGHT_EFFECT,
-	.effect_speed = 0,
-	.color_1 = { .h = 0, .s = 255, .v = 255 },
-	.color_2 = { .h = 127, .s = 255, .v = 255 },
-	.caps_lock_indicator = { .color = { .h = 0, .s = 0, .v = 255 }, .index = 255 },
+	.brightness = 192,
+	.effect = 3,
+	.effect_speed = 1,
+	.color_1 = { .h = 100, .s = 145, .v = 255 },
+	.color_2 = { .h = 184, .s = 255, .v = 255 },
+	.caps_lock_indicator = { .color = { .h = 18, .s = 255, .v = 255 }, .index = 8 },
 	.layer_1_indicator = { .color = { .h = 0, .s = 0, .v = 255 }, .index = 255 },
 	.layer_2_indicator = { .color = { .h = 0, .s = 0, .v = 255 }, .index = 255 },
 	.layer_3_indicator = { .color = { .h = 0, .s = 0, .v = 255 }, .index = 255 },
@@ -1424,6 +1424,15 @@ uint8_t decrement( uint8_t value, uint8_t step, uint8_t min, uint8_t max )
 	int16_t new_value = value;
 	new_value -= step;
 	return MIN( MAX( new_value, min ), max );
+}
+
+void backlight_effect_set(uint8_t effect)
+{
+	uint8_t sanitizedEffect = MIN( MAX( effect, 0 ), BACKLIGHT_EFFECT_MAX );
+	if (g_config.effect != sanitizedEffect) {
+		g_config.effect = sanitizedEffect;
+		backlight_config_save();
+	}
 }
 
 void backlight_effect_increase(void)
