@@ -1,6 +1,6 @@
 #pragma once
 
-// enable/disable LEDs based on layout
+// Enable/disable LEDs based on layout.
 #undef RGB_BACKLIGHT_USE_SPLIT_BACKSPACE
 #define RGB_BACKLIGHT_USE_SPLIT_BACKSPACE 0
 
@@ -19,14 +19,20 @@
 #undef RGB_BACKLIGHT_DISABLE_HHKB_BLOCKER_LEDS
 #define RGB_BACKLIGHT_DISABLE_HHKB_BLOCKER_LEDS 0
 
-// disable backlight when USB suspended (PC sleep/hibernate/shutdown)
+// Disable backlight when USB suspended (PC sleep/hibernate/shutdown).
 #undef RGB_BACKLIGHT_DISABLE_WHEN_USB_SUSPENDED
 #define RGB_BACKLIGHT_DISABLE_WHEN_USB_SUSPENDED 1
 
-// redefine number of layers for dynamic keymap (untested)
-// currently dynamic keymap is disabled in keymap rules.mk
+// Redefine number of layers for dynamic keymap (untested). Default 4.
+// Currently dynamic keymap is disabled in keymap rules.mk.
 // #undef DYNAMIC_KEYMAP_LAYER_COUNT
 // #define DYNAMIC_KEYMAP_LAYER_COUNT 5
 
-// tap dance tapping term
-// #define TAPPING_TERM 150
+// How long before a tap becomes a hold. If set above 500, a key tapped during
+// the tapping term will turn it into a hold too. Default 200.
+#undef TAPPING_TERM
+#define TAPPING_TERM 100
+
+// How many taps before triggering the toggle. Default 5.
+# undef TAPPING_TOGGLE
+#define TAPPING_TOGGLE 2
