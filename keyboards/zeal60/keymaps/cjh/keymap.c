@@ -2,7 +2,8 @@
 #include QMK_KEYBOARD_H
 #include "rgb_backlight.h"
 
-#define FN3_CAP LT(3, KC_CAPS)
+#define MT_BSPC MT(MOD_LCTL, KC_BSPC)
+#define FN4_CAP LT(4, KC_CAPS)
 
 // Keymap layers
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -25,7 +26,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSLS,
     KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_ENT,
     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,          KC_RSFT,
-    MO(1),   KC_LALT, KC_LGUI,                            KC_SPC,                             KC_RGUI, KC_RALT, TT(1),   MO(4)),
+    MO(2),   KC_LALT, KC_LGUI,                            KC_SPC,                             KC_RGUI, KC_RALT, TT(2),   MO(5)),
+
+/* macOS Colemak Layer
+ * ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬───────────┐
+ * │  `  │  1  │  2  │  3  │  4  │  5  │  6  │  7  │  8  │  9  │  0  │  -  │  =  │    BSPC   │
+ * ├─────┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬────────┤
+ * │   TAB  │  Q  │  W  │  F  │  P  │  G  │  J  │  L  │  U  │  Y  │  ;  │  [  │  ]  │    \   │
+ * ├────────┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴────────┤
+ * │ LCTL/BSPC│  A  │  R  │  S  │  T  │  D  │  H  │  N  │  E  │  I  │  O  │  '  │     ENT    │
+ * ├──────────┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴────────────┤
+ * │     LSFT    │  Z  │  X  │  C  │  V  │  B  │  K  │  M  │  ,  │  .  │  /  │      RSFT     │
+ * ├──────┬──────┴┬────┴──┬──┴─────┴─────┴─────┴─────┴─────┴───┬─┴─────┼─────┴─┬───────┬─────┤
+ * │ MFN1 │  LALT │  LGUI │                 SPC                │  RGUI │  RALT │  TFN1 │ MFN4│
+ * └──────┴───────┴───────┴────────────────────────────────────┴───────┴───────┴───────┴─────┘
+ */
+[1] = LAYOUT_60_ansi(
+    KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC,
+    KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_LBRC, KC_RBRC, KC_BSLS,
+    MT_BSPC, KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT, KC_ENT,
+    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,          KC_RSFT,
+    MO(2),   KC_LALT, KC_LGUI,                            KC_SPC,                             KC_RGUI, KC_RALT, TT(2),   MO(5)),
 
 /* macOS Fn Layer (Fn1)
  * ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬───────────┐
@@ -35,17 +56,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ├────────┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴────────┤
  * │          │ MUTE│ VOLD│ VOLU│  4  │  5  │  6  │ LFT │ DWN │ RGT │ PGDN│     │            │
  * ├──────────┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴────────────┤
- * │             │ PRV │ PLY │ NXT │  1  │  2  │  3  │  .  │     │     │     │               │
+ * │             │     │     │  0  │  1  │  2  │  3  │  .  │     │     │     │               │
  * ├──────┬──────┴┬────┴──┬──┴─────┴─────┴─────┴─────┴─────┴───┬─┴─────┼─────┴─┬───────┬─────┤
- * │      │       │       │                  0                 │       │       │       │     │
+ * │      │       │       │                                    │       │       │       │     │
  * └──────┴───────┴───────┴────────────────────────────────────┴───────┴───────┴───────┴─────┘
  */
-[1] = LAYOUT_60_ansi(
+[2] = LAYOUT_60_ansi(
     KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,
     KC_TRNS, KC_MRWD, KC_MPLY, KC_MFFD, KC_P7,   KC_P8,   KC_P9,   KC_HOME, KC_UP,   KC_END,  KC_PGUP, KC_SLCK, KC_PAUS, KC_TRNS,
     KC_TRNS, KC_MUTE, KC_VOLD, KC_VOLU, KC_P4,   KC_P5,   KC_P6,   KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN, KC_TRNS, KC_TRNS,
-    KC_TRNS, KC_MPRV, KC_MPLY, KC_MNXT, KC_P1,   KC_P2,   KC_P3,   KC_PDOT, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS,
-    KC_TRNS, KC_TRNS, KC_TRNS,                            KC_P0,                              KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS),
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_P0,   KC_P1,   KC_P2,   KC_P3,   KC_PDOT, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS,                            KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS),
 
 /* Windows Base Layer
  * ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬───────────┐
@@ -60,12 +81,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * │ LCTL │  LGUI │  LALT │                 SPC                │  RGUI │  RCTL │  TFN3 │ MFN4│
  * └──────┴───────┴───────┴────────────────────────────────────┴───────┴───────┴───────┴─────┘
  */
-[2] = LAYOUT_60_ansi(
+[3] = LAYOUT_60_ansi(
     KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC,
     KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSLS,
-    FN3_CAP, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_ENT,
+    FN4_CAP, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_ENT,
     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,          KC_RSFT,
-    KC_LCTL, KC_LGUI, KC_LALT,                            KC_SPC,                             KC_RGUI, KC_RCTL, TT(3),   MO(4)),
+    KC_LCTL, KC_LGUI, KC_LALT,                            KC_SPC,                             KC_RGUI, KC_RCTL, TT(4),   MO(5)),
 
 /* Windows Fn Layer (Fn2)
  * ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬───────────┐
@@ -75,17 +96,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ├────────┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴────────┤
  * │          │ MUTE│ VOLD│ VOLU│  4  │  5  │  6  │ LFT │ DWN │ RGT │ PGDN│     │            │
  * ├──────────┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴────────────┤
- * │             │ RWD │ PLY │ FFD │  1  │  2  │  3  │  .  │     │     │     │               │
+ * │             │     │     │  0  │  1  │  2  │  3  │  .  │     │     │     │               │
  * ├──────┬──────┴┬────┴──┬──┴─────┴─────┴─────┴─────┴─────┴───┬─┴─────┼─────┴─┬───────┬─────┤
- * │      │       │       │                  0                 │       │       │       │     │
+ * │      │       │       │                                    │       │       │       │     │
  * └──────┴───────┴───────┴────────────────────────────────────┴───────┴───────┴───────┴─────┘
  */
-[3] = LAYOUT_60_ansi(
+[4] = LAYOUT_60_ansi(
     KC_GRV,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,
     KC_TRNS, KC_MPRV, KC_MPLY, KC_MNXT, KC_P7,   KC_P8,   KC_P9,   KC_HOME, KC_UP,   KC_END,  KC_PGUP, KC_SLCK, KC_PAUS, KC_TRNS,
     KC_TRNS, KC_MUTE, KC_VOLD, KC_VOLU, KC_P4,   KC_P5,   KC_P6,   KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN, KC_TRNS, KC_TRNS,
-    KC_TRNS, KC_MRWD, KC_MPLY, KC_MFFD, KC_P1,   KC_P2,   KC_P3,   KC_PDOT, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS,
-    KC_TRNS, KC_TRNS, KC_TRNS,                            KC_P0,                              KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS),
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_P0,   KC_P1,   KC_P2,   KC_P3,   KC_PDOT, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS,                            KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS),
 
 /* Fn3 Layer (Zeal60 Configuration)
  * ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬───────────┐
@@ -95,16 +116,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ├────────┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴────────┤
  * │   CAPS   │     │     │     │     │     │     │     │     │     │     │     │            │
  * ├──────────┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴────────────┤
- * │             │     │     │     │     │     │ NKRO│     │     │ DF0 │ DF2 │               │
+ * │             │     │     │     │     │     │ NKRO│     │ DF1 │ DF0 │ DF3 │               │
  * ├──────┬──────┴┬────┴──┬──┴─────┴─────┴─────┴─────┴─────┴───┬─┴─────┼─────┴─┬───────┬─────┤
  * │      │       │       │                                    │       │       │       │     │
  * └──────┴───────┴───────┴────────────────────────────────────┴───────┴───────┴───────┴─────┘
  */
-[4] = LAYOUT_60_ansi(
+[5] = LAYOUT_60_ansi(
     KC_TRNS, EF_DEC,  EF_INC,  H1_DEC,  H1_INC,  H2_DEC,  H2_INC,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, BR_DEC,  BR_INC,  KC_POWER,
     KC_TRNS, KC_TRNS, KC_TRNS, S1_DEC,  S1_INC,  S2_DEC,  S2_INC,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, ES_DEC,  ES_INC,  KC_TRNS,
     KC_CAPS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, TG_NKRO, KC_TRNS, KC_TRNS, DF(0),   DF(2),            KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, TG_NKRO, KC_TRNS, DF(1),   DF(0),   DF(3),            KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS,                            KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS),
 
 };
@@ -115,7 +136,10 @@ uint32_t default_layer_state_set_kb(uint32_t state) {
         case 0:
             backlight_effect_set(3);
             break;
-        case 2:
+        case 1:
+            backlight_effect_set(5);
+            break;
+        case 3:
             backlight_effect_set(6);
             break;
         default:
@@ -127,13 +151,9 @@ uint32_t default_layer_state_set_kb(uint32_t state) {
 uint32_t layer_state_set_user(uint32_t state) {
     switch (biton32(state)) {
     // Fn1 and Fn2 layers.
-    case 1:
-    case 3:
-        backlight_effect_set(2);
-        break;
-    // Fn3 layer.
+    case 2:
     case 4:
-        backlight_effect_set(1);
+        backlight_effect_set(2);
         break;
     default:
         // Default layers for macOS and Windows.
@@ -141,7 +161,10 @@ uint32_t layer_state_set_user(uint32_t state) {
         case 0:
             backlight_effect_set(3);
             break;
-        case 2:
+        case 1:
+            backlight_effect_set(5);
+            break;
+        case 3:
             backlight_effect_set(6);
             break;
         default:
