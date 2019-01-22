@@ -134,13 +134,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 uint32_t default_layer_state_set_kb(uint32_t state) {
     switch (biton32(state)) {
         case 0:
-            backlight_effect_set(3);
+            backlight_effect_set_noeeprom(3);
             break;
         case 1:
-            backlight_effect_set(5);
+            backlight_effect_set_noeeprom(5);
             break;
         case 3:
-            backlight_effect_set(6);
+            backlight_effect_set_noeeprom(6);
             break;
         default:
             break;
@@ -153,19 +153,19 @@ uint32_t layer_state_set_user(uint32_t state) {
     // Fn1 and Fn2 layers.
     case 2:
     case 4:
-        backlight_effect_set(2);
+        backlight_effect_set_noeeprom(2);
         break;
     default:
         // Default layers for macOS and Windows.
         switch (biton32(default_layer_state)) {
         case 0:
-            backlight_effect_set(3);
+            backlight_effect_set_noeeprom(3);
             break;
         case 1:
-            backlight_effect_set(5);
+            backlight_effect_set_noeeprom(5);
             break;
         case 3:
-            backlight_effect_set(6);
+            backlight_effect_set_noeeprom(6);
             break;
         default:
             break;
