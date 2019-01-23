@@ -1426,6 +1426,11 @@ uint8_t decrement( uint8_t value, uint8_t step, uint8_t min, uint8_t max )
 	return MIN( MAX( new_value, min ), max );
 }
 
+uint8_t backlight_current_effect(void)
+{
+	return g_config.effect;
+}
+
 void backlight_effect_set_noeeprom(uint8_t effect)
 {
 	uint8_t sanitizedEffect = MIN( MAX( effect, 0 ), BACKLIGHT_EFFECT_MAX );

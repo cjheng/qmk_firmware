@@ -5,6 +5,8 @@
 #define MT_BSPC MT(MOD_LCTL, KC_BSPC)
 #define FN4_CAP LT(4, KC_CAPS)
 
+uint8_t previous_backlight_effect = 255;
+
 // Keymap layers
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -153,22 +155,13 @@ uint32_t layer_state_set_user(uint32_t state) {
     // Fn1 and Fn2 layers.
     case 2:
     case 4:
+        previous_backlight_effect = backlight_current_effect();
         backlight_effect_set_noeeprom(2);
         break;
     default:
-        // Default layers for macOS and Windows.
-        switch (biton32(default_layer_state)) {
-        case 0:
-            backlight_effect_set_noeeprom(3);
-            break;
-        case 1:
-            backlight_effect_set_noeeprom(5);
-            break;
-        case 3:
-            backlight_effect_set_noeeprom(6);
-            break;
-        default:
-            break;
+        if (previous_backlight_effect != 255) {
+            backlight_effect_set_noeeprom(previous_backlight_effect);
+            previous_backlight_effect = 255;
         }
         break;
     }
