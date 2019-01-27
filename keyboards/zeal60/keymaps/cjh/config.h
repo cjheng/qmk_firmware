@@ -23,6 +23,10 @@
 #undef RGB_BACKLIGHT_DISABLE_WHEN_USB_SUSPENDED
 #define RGB_BACKLIGHT_DISABLE_WHEN_USB_SUSPENDED 1
 
+// Disable backlight after 2 minutes.
+#undef RGB_BACKLIGHT_DISABLE_AFTER_TIMEOUT
+#define RGB_BACKLIGHT_DISABLE_AFTER_TIMEOUT 2
+
 // Redefine number of layers for dynamic keymap (untested). Default 4.
 // Currently dynamic keymap is disabled in keymap rules.mk.
 // #undef DYNAMIC_KEYMAP_LAYER_COUNT
